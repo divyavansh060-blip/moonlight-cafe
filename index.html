@@ -29,6 +29,8 @@ overflow-x:hidden;
 
 /* BACKGROUND */
 
+/* PREMIUM NIGHT CAFE BACKGROUND */
+
 body::before{
 content:'';
 position:fixed;
@@ -37,11 +39,17 @@ left:0;
 width:100%;
 height:100%;
 background:
-linear-gradient(rgba(0,0,0,.82),rgba(0,0,0,.88)),
-url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1974&auto=format&fit=crop');
+linear-gradient(
+rgba(0,0,0,.72),
+rgba(0,0,0,.82)
+),
+url('https://images.unsplash.com/photo-1521017432531-fbd92d768814?q=80&w=1974&auto=format&fit=crop');
+
 background-size:cover;
 background-position:center;
+background-attachment:fixed;
 z-index:-2;
+filter:brightness(.9);
 }
 
 .stars{
@@ -49,8 +57,8 @@ position:fixed;
 width:100%;
 height:100%;
 background:url('https://www.transparenttextures.com/patterns/stardust.png');
-opacity:.4;
-animation:stars 70s linear infinite;
+opacity:.25;
+animation:stars 120s linear infinite;
 z-index:-1;
 }
 
@@ -74,10 +82,11 @@ padding:18px 8%;
 display:flex;
 justify-content:space-between;
 align-items:center;
-background:rgba(0,0,0,.35);
-backdrop-filter:blur(12px);
+background:rgba(0,0,0,.22);
+backdrop-filter:blur(18px);
 z-index:999;
-border-bottom:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid rgba(255,216,111,.08);
+box-shadow:0 0 20px rgba(0,0,0,.25);
 }
 
 .logo{
@@ -112,6 +121,12 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:20px;
+padding-top:100px;
+background:radial-gradient(
+circle at center,
+rgba(255,216,111,.08),
+transparent 60%
+);
 }
 
 .hero-content{
@@ -120,10 +135,24 @@ animation:fadeUp 1.5s ease;
 }
 
 .hero h1{
-font-size:110px;
+font-size:120px;
 font-family:'Great Vibes',cursive;
-color:#ffd86f;
-text-shadow:0 0 20px rgba(255,216,111,.8);
+background:linear-gradient(45deg,#ffd86f,#fff3c4,#ffb347);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+text-shadow:
+0 0 25px rgba(255,216,111,.7),
+0 0 60px rgba(255,216,111,.4);
+animation:glow 3s ease-in-out infinite alternate;
+}
+
+@keyframes glow{
+from{
+filter:drop-shadow(0 0 10px #ffd86f);
+}
+to{
+filter:drop-shadow(0 0 30px #ffb347);
+}
 }
 
 .hero p{
@@ -139,9 +168,11 @@ display:flex;
 justify-content:center;
 gap:20px;
 flex-wrap:wrap;
+flex-direction:column;
 }
 
 .hero button{
+width:100%;
 padding:15px 35px;
 border:none;
 border-radius:50px;
@@ -202,14 +233,22 @@ gap:30px;
 }
 
 .card{
-background:rgba(255,255,255,.07);
-backdrop-filter:blur(12px);
-border-radius:28px;
-padding:28px;
-border:1px solid rgba(255,255,255,.08);
-transition:.4s;
+background:linear-gradient(
+145deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.03)
+);
+backdrop-filter:blur(20px);
+-webkit-backdrop-filter:blur(20px);
+border-radius:30px;
+padding:30px;
+border:1px solid rgba(255,216,111,.15);
+transition:.5s;
 position:relative;
 overflow:hidden;
+box-shadow:
+0 10px 40px rgba(0,0,0,.45),
+0 0 20px rgba(255,216,111,.08);
 }
 
 .card::before{
@@ -224,8 +263,13 @@ border-radius:50%;
 }
 
 .card:hover{
-transform:translateY(-10px);
-box-shadow:0 0 30px rgba(255,216,111,.2);
+transform:
+translateY(-12px)
+scale(1.02);
+
+box-shadow:
+0 0 35px rgba(255,216,111,.25),
+0 0 80px rgba(255,216,111,.08);
 }
 
 .card h3{
@@ -254,17 +298,21 @@ font-weight:600;
 
 .item button{
 width:100%;
-padding:11px;
+padding:13px;
 border:none;
-border-radius:14px;
-background:#ffd86f;
+border-radius:16px;
+background:linear-gradient(45deg,#ffd86f,#ffb347);
 color:black;
 font-weight:700;
 cursor:pointer;
-transition:.3s;
+transition:.4s;
+box-shadow:0 0 15px rgba(255,216,111,.3);
 }
 
 .item button:hover{
+    transform:translateY(-2px) scale(1.03);
+box-shadow:
+0 0 25px rgba(255,216,111,.6);
 background:#ffb347;
 transform:scale(1.02);
 }
@@ -275,14 +323,29 @@ transform:scale(1.02);
 position:fixed;
 right:25px;
 bottom:25px;
-background:#ffd86f;
+background:linear-gradient(45deg,#ffd86f,#ffb347);
 color:black;
-padding:17px 22px;
-border-radius:50px;
+padding:18px 24px;
+border-radius:60px;
 font-weight:700;
 cursor:pointer;
 z-index:1000;
-box-shadow:0 0 25px rgba(255,216,111,.5);
+box-shadow:
+0 0 25px rgba(255,216,111,.5),
+0 0 50px rgba(255,216,111,.2);
+animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0);
+}
+50%{
+transform:translateY(-8px);
+}
+100%{
+transform:translateY(0);
+}
 }
 
 .cart-panel{
@@ -371,7 +434,14 @@ align-items:center;
 .about img{
 width:100%;
 border-radius:30px;
-box-shadow:0 0 30px rgba(255,216,111,.15);
+box-shadow:
+0 0 30px rgba(255,216,111,.15),
+0 0 80px rgba(255,216,111,.08);
+transition:.5s;
+}
+
+.about img:hover{
+transform:scale(1.03);
 }
 
 .about-text h2{
@@ -450,8 +520,23 @@ width:100%;
 
 section{
 padding:80px 5%;
+position:relative;
 }
-
+section::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:
+radial-gradient(
+circle at top right,
+rgba(255,216,111,.06),
+transparent 40%
+);
+pointer-events:none;
+}
 }
 
 /* PAYMENT MODAL */
@@ -485,6 +570,13 @@ max-width:400px;
 border-radius:25px;
 text-align:center;
 border:1px solid rgba(255,255,255,.1);
+
+max-height:90vh;
+overflow-y:auto;
+}
+.payment-modal{
+padding:20px;
+overflow-y:auto;
 }
 
 .payment-box h2{
@@ -539,6 +631,63 @@ font-size:15px;
 color:#ccc;
 }
 
+.qr-box{
+margin-top:10px;
+padding:15px;
+background:rgba(255,255,255,.05);
+border-radius:20px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.qr-box img{
+width:220px;
+max-width:100%;
+border-radius:15px;
+margin-top:10px;
+}
+
+.qr-box p{
+margin-top:12px;
+font-size:15px;
+color:#ffd86f;
+}
+
+.paid-btn{
+width:100%;
+margin-top:15px;
+padding:14px;
+border:none;
+border-radius:15px;
+background:#00c853;
+color:white;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+}
+
+.paid-btn:hover{
+transform:scale(1.03);
+background:#00b34a;
+}
+
+@keyframes fadeUp{
+from{
+opacity:0;
+transform:translateY(40px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.card,
+.contact-card,
+.about img,
+.about-text{
+animation:fadeUp 1s ease;
+}
 </style>
 
 </head>
@@ -1095,12 +1244,13 @@ Place Order On WhatsApp
 <div class="payment-modal" id="paymentModal">
 
 <div class="payment-box">
+    <span class="close-payment" onclick="closePayment()">✖</span>
+
 <input type="text" id="customerName" placeholder="Enter Your Name">
 
 <input type="text" id="customerAddress" placeholder="Enter Address">
 
 <input type="tel" id="customerPhone" placeholder="Enter Mobile Number">
-<span class="close-payment" onclick="closePayment()">✖</span>
 
 <h2>Select Payment Method</h2>
 
@@ -1122,10 +1272,30 @@ Place Order On WhatsApp
 💳 Paytm
 </button>
 
-<button onclick="confirmOrder()">
-✅ Confirm Order
+<!-- QR CODE -->
+
+<!-- REPLACE ONLY THIS QR SECTION -->
+
+<div class="qr-box">
+
+<button class="paid-btn" onclick="paymentDone()">
+✅ I Have Paid
 </button>
 
+<img 
+src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=MoonlightCafePayment"
+alt="QR Code"
+>
+
+<p>
+📷 Scan QR For Online Payment
+</p>
+
+</div>
+
+<button class="order-final-btn" onclick="confirmOrder()">
+📦 Confirm & Send Order
+</button>
 </div>
 
 </div>
@@ -1249,6 +1419,7 @@ document.getElementById("paymentModal").classList.remove("active");
 
 }
 
+let paymentVerified = false;
 let selectedPayment = "";
 
 function payMethod(method){
@@ -1259,18 +1430,17 @@ alert(method + " Selected");
 
 }
 
+/* CONFIRM ORDER */
+
 function confirmOrder(){
 
 const name = document.getElementById("customerName").value;
-
 const address = document.getElementById("customerAddress").value;
-
 const phone = document.getElementById("customerPhone").value;
 
 if(name==="" || address==="" || phone===""){
 
 alert("Please Fill All Details");
-
 return;
 
 }
@@ -1278,7 +1448,18 @@ return;
 if(selectedPayment===""){
 
 alert("Please Select Payment Method");
+return;
 
+}
+
+/* ONLINE PAYMENT CHECK */
+
+if(
+selectedPayment !== "Cash On Delivery"
+&& paymentVerified === false
+){
+
+alert("Please Complete Payment First");
 return;
 
 }
@@ -1294,17 +1475,35 @@ text += `🍴 ${item.name} - ₹${item.price}\n`;
 });
 
 text += `\n💰 Total = ₹${total}`;
-
 text += `\n💳 Payment Method = ${selectedPayment}`;
 
 let finalText = encodeURIComponent(text);
 
 window.open(`https://wa.me/919426004345?text=${finalText}`);
 
+/* RESET */
+
+cart = [];
+total = 0;
+paymentVerified = false;
+selectedPayment = "";
+
+updateCart();
+
 closePayment();
+closeCart();
 
 }
 
+/* PAYMENT SUCCESS */
+
+function paymentDone(){
+
+paymentVerified = true;
+
+alert("Payment Successful ✅");
+
+}
 </script>
 </body>
 </html>
