@@ -254,7 +254,9 @@
                         </div>
                         <p id="statusMessage" style="color:red; font-weight:bold; margin: 10px 0; font-size: 13px;"></p>
                         <button class="add-btn" style="width:100%; margin-top:12px; height:36px;" onclick="app.launchUpiIntent()">📲 Launch UPI App Link</button>
-                        <button class="action-btn-prime" style="background:#0288d1; color:#fff; font-size:12px; padding:10px; margin-top:10px; box-shadow:none;" onclick="app.verifyOnlinePayment()">✅ I Have Paid Successfully</button>
+                        <div id="statusMessage" style="color:#ffa500; font-weight:bold; margin: 15px 0; font-size: 14px;">
+    ⏳ Waiting for payment... Please do not close this window.
+</div>
                     </div>
                 </div>
 
@@ -751,6 +753,7 @@
                     this.paymentVerifiedToken = false;
                     whatsappBtn.disabled = false;
                 }
+                    this.checkPaymentStatusAutomatically(currentOrderId);
             }
 
             launchUpiIntent() {
@@ -851,7 +854,34 @@
                     }, 2000);
                 }, 800);
             }
+checkPaymentStatusAutomatically(orderId) {
 
+    this.paymentCheckInterval = setInterval(async () => {
+        try {
+           
+            let response = await fetch(`https://api.yourgateway.com/check-status?order_id=${orderId}`);
+            let data = await response.json();
+
+            
+            if (data.status === "SUCCESS" || data.success === true) {
+                clearInterval(this.paymentCheckInterval); 
+                this.paymentVerifiedToken = true;
+                
+        
+                const statusMsg = document.getElementById("statusMessage");
+                statusMsg.innerHTML = "✅ Payment Received Successfully!";
+                statusMsg.style.color = "green";
+                        
+                document.getElementById("whatsappButton").disabled = false;
+                
+                alert("🎉Payment received! Your order is being submitted...");
+                this.submitFinalCheckout(); 
+            }
+        } catch (error) {
+            console.error("Payment status check error:", error);
+        }
+    }, 3000);
+}
             hideSuccessPopup() {
                 document.getElementById('success-popup').classList.remove('active');
             }
