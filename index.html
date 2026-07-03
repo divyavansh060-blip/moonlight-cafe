@@ -96,6 +96,7 @@
 
         /* SWIGGY CORE COMPONENTS QUANTITY COUNTERS BUTTONS */
         .add-btn { background: var(--bg-primary); border: 1px solid var(--accent); color: var(--accent); font-size: 12px; font-weight: 700; padding: 6px 20px; border-radius: 10px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .qty-box { display: flex; align-items: center; background: var(--accent-gradient); border-radius: 10px; overflow: hidden; color: #000; font-weight: 700; font-size: 13px; width: 85px; justify-content: space-between; height: 30px; }
         .qty-box button { background: transparent; border: none; width: 28px; height: 100%; font-weight: 800; font-size: 14px; cursor: pointer; color: #000; }
 
@@ -122,6 +123,7 @@
 
         /* SUBMIT PRIMARY BUTTON ACTION BAR */
         .action-btn-prime { background: #00e676; color: #000; width: 100%; border: none; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 14px; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,230,118,0.25); }
+        .action-btn-prime:disabled { background: #555 !important; color: #aaa !important; cursor: not-allowed; box-shadow: none !important; }
 
         /* SWIGGY STYLE PREMIUM BOTTOM STICKY NAVIGATION */
         .swiggy-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border-color); height: 70px; display: flex; justify-content: space-around; align-items: center; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
@@ -244,10 +246,13 @@
                     </div>
 
                     <div id="upiPaymentContainer" class="panel" style="display:none; text-align:center; margin-top:10px; background:rgba(255,255,255,0.03);">
-                        <p style="font-size:12px; margin-bottom:10px;">Scan QR Code using any UPI App</p>
-                        <div class="qr-box">
-                            <img id="upiGenQR" src="" alt="Dynamic Code">
+                        <div id="paymentArea">
+                            <h3>QR Code Scan Karo (Time Remaining: <span id="timer">05:00</span>)</h3>
+                            <div class="qr-box" style="margin: 10px auto; display: inline-block;">
+                                <img id="upiGenQR" src="" alt="QR Code" style="display:block; max-width:150px;">
+                            </div>
                         </div>
+                        <p id="statusMessage" style="color:red; font-weight:bold; margin: 10px 0; font-size: 13px;"></p>
                         <button class="add-btn" style="width:100%; margin-top:12px; height:36px;" onclick="app.launchUpiIntent()">📲 Launch UPI App Link</button>
                         <button class="action-btn-prime" style="background:#0288d1; color:#fff; font-size:12px; padding:10px; margin-top:10px; box-shadow:none;" onclick="app.verifyOnlinePayment()">✅ I Have Paid Successfully</button>
                     </div>
@@ -262,7 +267,7 @@
                     <div class="bill-row grand-total"><span>Grand Total</span><span id="bill-grand">₹0.00</span></div>
                 </div>
 
-                <button class="action-btn-prime" onclick="app.submitFinalCheckout()"><i class="fab fa-whatsapp"></i> <span id="lang-whatsapp-btn">Place Order via WhatsApp</span></button>
+                <button id="whatsappButton" class="action-btn-prime" onclick="app.submitFinalCheckout()"><i class="fab fa-whatsapp"></i> <span id="lang-whatsapp-btn">Place Order via WhatsApp</span></button>
             </div>
         </div>
     </main>
@@ -376,6 +381,8 @@
                 this.paymentVerifiedToken = false;
                 this.selectedCategoryFilter = "all";
                 this.activeTabRoute = "home";
+                this.countdownInterval = null;
+                this.timeRemaining = 0;
 
                 this.bootEngineLifecycle();
             }
@@ -693,17 +700,56 @@
 
             handlePaymentUI(mode) {
                 const uBox = document.getElementById('upiPaymentContainer');
+                const whatsappBtn = document.getElementById('whatsappButton');
+                
+                // Clear any running interval
+                if (this.countdownInterval) {
+                    clearInterval(this.countdownInterval);
+                }
+
                 if (mode === "Online UPI") {
+                    this.paymentVerifiedToken = false;
+                    whatsappBtn.disabled = true;
+                    
                     let sub = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
                     let disc = this.isCouponApplied ? 50 : 0;
                     let total = (sub - disc) + this.DELIVERY_CONSTANT_FEE + Math.round((sub - disc) * 0.05);
                     
-                    const upiStringUrl = `upi://pay?pa=9426004345@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
-                    document.getElementById('upiGenQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(upiStringUrl)}`;
+                    const upiStringUrl = `upi://pay?pa=9978789793@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
+                    document.getElementById('upiGenQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiStringUrl)}`;
+                    document.getElementById('upiGenQR').style.display = "block";
+                    document.getElementById('statusMessage').innerHTML = "";
                     uBox.style.display = 'block';
+
+                    // 5 મિનિટ એટલે કે 300 સેકન્ડ
+                    this.timeRemaining = 5 * 60;
+                    const timerElement = document.getElementById("timer");
+                    const qrCodeElement = document.getElementById("upiGenQR");
+                    const statusMessageElement = document.getElementById("statusMessage");
+
+                    this.countdownInterval = setInterval(() => {
+                        let minutes = Math.floor(this.timeRemaining / 60);
+                        let seconds = this.timeRemaining % 60;
+
+                        seconds = seconds < 10 ? '0' + seconds : seconds;
+                        minutes = minutes < 10 ? '0' + minutes : minutes;
+
+                        timerElement.innerHTML = minutes + ":" + seconds;
+
+                        if (this.timeRemaining <= 0) {
+                            clearInterval(this.countdownInterval);
+                            timerElement.innerHTML = "00:00";
+                            qrCodeElement.style.display = "none";
+                            statusMessageElement.innerHTML = "QR Code expired! Please refresh to try again.";
+                            statusMessageElement.style.color = "red";
+                        }
+                        this.timeRemaining--;
+                    }, 1000);
+
                 } else {
                     uBox.style.display = 'none';
                     this.paymentVerifiedToken = false;
+                    whatsappBtn.disabled = false;
                 }
             }
 
@@ -711,11 +757,21 @@
                 let sub = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
                 let disc = this.isCouponApplied ? 50 : 0;
                 let total = (sub - disc) + this.DELIVERY_CONSTANT_FEE + Math.round((sub - disc) * 0.05);
-                window.location.href = `upi://pay?pa=9426004345@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
+                window.location.href = `upi://pay?pa=9978789793@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
             }
 
             verifyOnlinePayment() {
+                if (this.timeRemaining <= 0) {
+                    alert("QR Code has expired. Please select payment method again.");
+                    return;
+                }
+                clearInterval(this.countdownInterval);
                 this.paymentVerifiedToken = true;
+                document.getElementById("whatsappButton").disabled = false;
+                
+                const statusMessageElement = document.getElementById("statusMessage");
+                statusMessageElement.innerHTML = "Payment Successful! Now you can place order.";
+                statusMessageElement.style.color = "green";
                 alert("✅ Online Transaction Registered! Please submit order to proceed.");
             }
 
@@ -837,4 +893,4 @@
 }
     </script>
 </body>
-</html> 
+</html>
