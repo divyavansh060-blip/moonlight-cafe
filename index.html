@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="dark" data-lang="en">
-    <link rel="manifest" href="manifest.json">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -46,7 +45,7 @@
         #splash-screen { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: linear-gradient(180deg, #060112 0%, #190d33 100%); z-index: 10000; display: flex; flex-direction: column; justify-content: center; align-items: center; color: #fff; transition: opacity 0.5s ease, transform 0.5s ease; }
         .splash-logo { font-family: 'Great Vibes', cursive; font-size: 65px; color: #ffd86f; text-shadow: 0 0 30px rgba(255,216,111,0.5); animation: pulse 2s infinite; }
         
-        /* OVERLAY LOADING STATE Spinner */
+        /* OVERLAY LOADING STATE */
         #loader-overlay { position: fixed; top: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; height: 100vh; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         #loader-overlay.active { opacity: 1; pointer-events: auto; }
         .spinner-prime { width: 45px; height: 45px; border: 4px solid rgba(255,216,111,0.2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
@@ -54,22 +53,21 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.05); opacity: 0.8; } }
 
-        /* OFFLINE DETECTION TOAST BANNER */
         #offline-banner { background: #ff4d6d; color: #fff; text-align: center; padding: 6px; font-size: 12px; font-weight: 600; position: sticky; top: 70px; z-index: 850; display: none; width: 100%; }
 
-        /* TOP ACTIONS NAVIGATION HEADER BAR */
+        /* HEADER BAR */
         header { background: var(--bg-secondary); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 900; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .navbar { display: flex; justify-content: space-between; align-items: center; height: 70px; padding: 0 20px; }
-        .logo { font-size: 32px; font-family: 'Great Vibes', cursive; color: var(--accent); font-weight: bold; }
+        .logo { font-size: 32px; font-family: 'Great Vibes', cursive; color: var(--accent); font-weight: bold; cursor: pointer; }
         .nav-utils { display: flex; gap: 15px; align-items: center; }
         .nav-utils i { font-size: 1.2rem; cursor: pointer; color: var(--text-main); padding: 8px; border-radius: 50%; background: var(--bg-tertiary); }
 
-        /* HERO UTILITY VIEW BANNER */
+        /* HERO BANNER */
         .hero-banner { background: linear-gradient(135deg, var(--bg-secondary), var(--bg-tertiary)); border-radius: 20px; padding: 20px; margin: 15px 0; border: 1px solid var(--border-color); text-align: center; }
         .hero-banner h1 { font-family: 'Great Vibes', cursive; font-size: 42px; color: var(--accent); }
         .hero-banner p { font-size: 12px; color: var(--text-muted); line-height: 1.5; margin-top: 5px; }
 
-        /* HORIZONTAL SCROLL TRENDING SECTION */
+        /* TRENDING SECTION */
         .trending-section { margin: 20px 0; }
         .section-title { font-size: 16px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; padding: 0 5px; }
         .trending-container { display: flex; gap: 15px; overflow-x: auto; padding: 5px 0 15px 0; }
@@ -77,7 +75,7 @@
         .trending-card h4 { font-size: 13px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin: 6px 0; }
         .trending-card .price { font-size: 13px; color: var(--accent); font-weight: 700; }
 
-        /* GRID CATALOG ITEMS SECTIONS */
+        /* GRID CATALOG ITEMS */
         .filter-scroller { display: flex; gap: 10px; overflow-x: auto; padding: 10px 0; margin-bottom: 15px; }
         .filter-chip { padding: 8px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 50px; font-size: 12px; font-weight: 500; white-space: nowrap; color: var(--text-main); cursor: pointer; }
         .filter-chip.active { background: var(--accent-gradient); color: #000; font-weight: 600; border-color: transparent; }
@@ -94,45 +92,26 @@
         .item-price-row { display: flex; justify-content: space-between; align-items: center; margin-top: 10px; }
         .item-price { font-weight: 700; color: var(--accent); font-size: 15px; }
 
-        /* SWIGGY CORE COMPONENTS QUANTITY COUNTERS BUTTONS */
-        .add-btn { background: var(--bg-primary); border: 1px solid var(--accent); color: var(--accent); font-size: 12px; font-weight: 700; padding: 6px 20px; border-radius: 10px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .add-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        .qty-box { display: flex; align-items: center; background: var(--accent-gradient); border-radius: 10px; overflow: hidden; color: #000; font-weight: 700; font-size: 13px; width: 85px; justify-content: space-between; height: 30px; }
-        .qty-box button { background: transparent; border: none; width: 28px; height: 100%; font-weight: 800; font-size: 14px; cursor: pointer; color: #000; }
-
-        /* PANEL BOX INFOS & CHECKOUT SECTIONS */
+        /* PANEL BOX INFOS & BOOKING FORMS */
         .panel { background: var(--bg-secondary); border-radius: 20px; padding: 18px; border: 1px solid var(--border-color); margin-bottom: 15px; box-shadow: var(--card-shadow); }
         .panel h3 { font-size: 15px; font-weight: 700; margin-bottom: 12px; border-bottom: 1px solid var(--border-color); padding-bottom: 8px; }
         
         .form-group { margin-bottom: 12px; }
+        .form-group label { display: block; font-size: 11px; color: var(--text-muted); margin-bottom: 4px; font-weight: 500; }
         .form-group input, .form-group select { width: 100%; padding: 12px; background: var(--bg-tertiary); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 12px; font-size: 13px; outline: none; }
         .form-group input:focus { border-color: var(--accent); }
         .error-txt { color: #ff4d6d; font-size: 11px; margin-top: 4px; display: none; }
 
-        /* COUPON SECTION MODULE */
-        .coupon-bar { display: flex; justify-content: space-between; align-items: center; background: rgba(255,216,111,0.06); border: 1px dashed var(--accent); padding: 12px; border-radius: 12px; margin-bottom: 15px; }
-        .coupon-info h5 { font-size: 13px; font-weight: 700; color: var(--accent); }
-        .coupon-info p { font-size: 11px; color: var(--text-muted); }
-        .coupon-btn { background: var(--accent-gradient); color: #000; border: none; font-size: 11px; font-weight: 700; padding: 6px 14px; border-radius: 8px; cursor: pointer; }
-        .coupon-btn.applied { background: #ff4d6d; color: #fff; }
+        /* ACTION BUTTON */
+        .action-btn-prime { background: #00e676; color: #000; width: 100%; border: none; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 14px; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,230,118,0.25); margin-top: 10px; }
 
-        /* PRICING BREAKDOWNS SHEET */
-        .bill-row { display: flex; justify-content: space-between; font-size: 13px; color: var(--text-muted); margin-bottom: 8px; }
-        .bill-row.grand-total { font-size: 16px; font-weight: 800; color: var(--text-main); border-top: 1px dashed var(--border-color); padding-top: 10px; margin-top: 10px; }
-        .green-text { color: #00c853 !important; font-weight: 600; }
-
-        /* SUBMIT PRIMARY BUTTON ACTION BAR */
-        .action-btn-prime { background: #00e676; color: #000; width: 100%; border: none; font-weight: 700; font-size: 15px; padding: 14px; border-radius: 14px; display: flex; justify-content: center; align-items: center; gap: 8px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,230,118,0.25); }
-        .action-btn-prime:disabled { background: #555 !important; color: #aaa !important; cursor: not-allowed; box-shadow: none !important; }
-
-        /* SWIGGY STYLE PREMIUM BOTTOM STICKY NAVIGATION */
+        /* STICKY BOTTOM NAVIGATION */
         .swiggy-nav { position: fixed; bottom: 0; left: 50%; transform: translateX(-50%); width: 100%; max-width: 480px; background: var(--nav-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border-top: 1px solid var(--border-color); height: 70px; display: flex; justify-content: space-around; align-items: center; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.15); }
         .nav-item { display: flex; flex-direction: column; align-items: center; justify-content: center; color: var(--text-muted); background: transparent; border: none; font-size: 11px; font-weight: 600; cursor: pointer; flex: 1; height: 100%; gap: 4px; position: relative; }
         .nav-item i { font-size: 18px; }
         .nav-item.active { color: var(--accent); }
-        .nav-badge { position: absolute; top: 12px; right: 28%; background: #ff4d6d; color: #fff; font-size: 9px; font-weight: 800; padding: 2px 6px; border-radius: 20px; min-width: 18px; text-align: center; }
 
-        /* ORDER SUCCESS COMPLETION MODAL POPUP */
+        /* SUCCESS MODAL POPUP */
         #success-popup { position: fixed; top:0; left:50%; transform:translateX(-50%); width:100%; max-width:480px; height:100vh; background: rgba(0,0,0,0.75); backdrop-filter: blur(5px); z-index: 11000; display: flex; justify-content: center; align-items: center; opacity: 0; pointer-events: none; transition: opacity 0.4s ease; }
         #success-popup.active { opacity: 1; pointer-events: auto; }
         .success-card { background: var(--bg-secondary); border: 1px solid var(--border-color); width: 85%; border-radius: 28px; padding: 30px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: translateY(30px); transition: transform 0.4s ease; }
@@ -141,10 +120,9 @@
         .success-card h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
         .success-card p { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
 
-        /* MINI REFRESH SYSTEM UTILS FOR FAVS */
         .fav-icon { cursor: pointer; transition: 0.2s; font-size: 16px; }
         .fav-icon.active { color: #ff4d6d !important; }
-        .qr-box { background: #fff; padding: 12px; border-radius: 12px; display: inline-block; margin-top: 10px; }
+        .add-btn { background: var(--bg-primary); border: 1px solid var(--accent); color: var(--accent); font-size: 12px; font-weight: 700; padding: 6px 20px; border-radius: 10px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -152,7 +130,7 @@
     <div id="splash-screen">
         <div class="splash-logo">Moonlight Cafe</div>
         <div class="spinner-prime" style="margin-top: 20px;"></div>
-        <p style="font-size: 11px; tracking-widest; color: #ffd86f; margin-top: 15px; opacity: 0.7;">LOADING ROYAL VIBES...</p>
+        <p style="font-size: 11px; color: #ffd86f; margin-top: 15px; opacity: 0.7;">LOADING ROYAL VIBES...</p>
     </div>
 
     <div id="loader-overlay">
@@ -182,8 +160,7 @@
 
             <div class="trending-section">
                 <div class="section-title">🔥 <span id="lang-trending">Trending Dishes</span></div>
-                <div class="trending-container no-scrollbar" id="trending-row">
-                    </div>
+                <div class="trending-container no-scrollbar" id="trending-row"></div>
             </div>
 
             <div class="section-title">🍔 <span id="lang-menu">Explore Culinary Menu</span></div>
@@ -192,9 +169,7 @@
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
 
-            <div class="filter-scroller no-scrollbar" id="category-chips">
-                </div>
-
+            <div class="filter-scroller no-scrollbar" id="category-chips"></div>
             <div class="item-list" id="home-catalog-list"></div>
         </div>
 
@@ -203,73 +178,53 @@
             <div class="item-list" id="favs-catalog-list"></div>
         </div>
 
-        <div id="view-cart" class="view-panel" style="display:none;">
-            <div class="section-title">🛒 <span id="lang-cart-title">Your Basket Items</span></div>
+        <div id="view-book" class="view-panel" style="display:none;">
+            <div class="section-title">📅 <span id="lang-book-title">Book A Luxury Table</span></div>
             
-            <div id="cart-empty-msg" class="panel" style="text-align:center; padding:40px 20px; display:none;">
-                <i class="fa-solid fa-bag-shopping" style="font-size:40px; color:var(--text-muted); margin-bottom:12px;"></i>
-                <p style="font-size:14px; color:var(--text-muted);" id="lang-empty">Your Cart is Empty 🌙</p>
-            </div>
-
-            <div id="cart-active-wrapper">
-                <div class="panel item-list" id="cart-items-list" style="gap:15px;"></div>
-
-                <div class="coupon-bar">
-                    <div class="coupon-info">
-                        <h5>MOON50</h5>
-                        <p id="lang-coupon-desc">Get flat ₹50 discount on orders above ₹150</p>
-                    </div>
-                    <button class="coupon-btn" id="couponActionBtn" onclick="app.triggerCouponCode()">APPLY</button>
+            <div class="panel">
+                <h3 id="lang-book-header">🏰 Table Reservation Details</h3>
+                
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="bookName" placeholder="Enter your full name">
+                    <div class="error-txt" id="err-bookName">Name is required</div>
                 </div>
 
-                <div class="panel">
-                    <h3 id="lang-delivery-header">👤 Delivery Particulars</h3>
-                    <div class="form-group">
-                        <input type="text" id="custName" placeholder="Recipient Full Name">
-                        <div class="error-txt" id="err-custName">Name is required</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="text" id="custAddress" placeholder="Complete Drop Address Detail">
-                        <div class="error-txt" id="err-custAddress">Address is required</div>
-                    </div>
-                    <div class="form-group">
-                        <input type="tel" id="custPhone" placeholder="10-Digit WhatsApp Mobile Contact" maxlength="10">
-                        <div class="error-txt" id="err-custPhone">Enter valid 10-digit smartphone number</div>
-                    </div>
-                    <div class="form-group" style="margin-top:15px;">
-                        <select id="checkoutPaymentSelect" onchange="app.handlePaymentUI(this.value)">
-                            <option value="">-- Select Payment Method --</option>
-                            <option value="Cash On Delivery">💵 Cash On Delivery</option>
-                            <option value="Online UPI">📲 Scan to Pay Online (UPI)</option>
-                        </select>
-                        <div class="error-txt" id="err-paymode">Please pick payment option</div>
-                    </div>
-
-                    <div id="upiPaymentContainer" class="panel" style="display:none; text-align:center; margin-top:10px; background:rgba(255,255,255,0.03);">
-                        <div id="paymentArea">
-                            <h3>QR Code Scan Karo (Time Remaining: <span id="timer">05:00</span>)</h3>
-                            <div class="qr-box" style="margin: 10px auto; display: inline-block;">
-                                <img id="upiGenQR" src="" alt="QR Code" style="display:block; max-width:150px;">
-                            </div>
-                        </div>
-                        <p id="statusMessage" style="color:red; font-weight:bold; margin: 10px 0; font-size: 13px;"></p>
-                        <button class="add-btn" style="width:100%; margin-top:12px; height:36px;" onclick="app.launchUpiIntent()">📲 Launch UPI App Link</button>
-                        <div id="statusMessage" style="color:#ffa500; font-weight:bold; margin: 15px 0; font-size: 14px;">
-    ⏳ Waiting for payment... Please do not close this window.
-</div>
-                    </div>
+                <div class="form-group">
+                    <label>WhatsApp Number</label>
+                    <input type="tel" id="bookPhone" placeholder="10-Digit Mobile Contact" maxlength="10">
+                    <div class="error-txt" id="err-bookPhone">Enter a valid 10-digit smartphone number</div>
                 </div>
 
-                <div class="panel">
-                    <h3 id="lang-bill-header">Receipt Calculations</h3>
-                    <div class="bill-row"><span>Item Total</span><span id="bill-subtotal">₹0.00</span></div>
-                    <div class="bill-row green-text" id="bill-discount-row" style="display:none;"><span>Coupon Discount (MOON50)</span><span id="bill-discount">-₹50.00</span></div>
-                    <div class="bill-row"><span>Delivery Charge</span><span id="bill-delivery">₹30.00</span></div>
-                    <div class="bill-row"><span>GST (5%)</span><span id="bill-gst">₹0.00</span></div>
-                    <div class="bill-row grand-total"><span>Grand Total</span><span id="bill-grand">₹0.00</span></div>
+                <div class="form-group">
+                    <label>Select Date</label>
+                    <input type="date" id="bookDate">
+                    <div class="error-txt" id="err-bookDate">Please choose a valid date</div>
                 </div>
 
-                <button id="whatsappButton" class="action-btn-prime" onclick="app.submitFinalCheckout()"><i class="fab fa-whatsapp"></i> <span id="lang-whatsapp-btn">Place Order via WhatsApp</span></button>
+                <div class="form-group">
+                    <label>Select Time Slot</label>
+                    <select id="bookTime">
+                        <option value="">-- Choose Arrival Time --</option>
+                        <option value="06:00 PM - 07:30 PM">🌅 06:00 PM - 07:30 PM</option>
+                        <option value="07:30 PM - 09:00 PM">✨ 07:30 PM - 09:00 PM</option>
+                        <option value="09:00 PM - 10:30 PM">🌙 09:00 PM - 10:30 PM</option>
+                        <option value="10:30 PM - 12:00 AM">🌌 10:30 PM - 12:00 AM</option>
+                    </select>
+                    <div class="error-txt" id="err-bookTime">Please pick a time slot</div>
+                </div>
+
+                <div class="form-group">
+                    <label>Total Guests</label>
+                    <select id="bookGuests">
+                        <option value="2 Persons">2 Persons</option>
+                        <option value="3-4 Persons">3-4 Persons</option>
+                        <option value="5-6 Persons">5-6 Persons</option>
+                        <option value="6+ Family Lounge">6+ Family Lounge Area</option>
+                    </select>
+                </div>
+
+                <button class="action-btn-prime" onclick="app.submitTableBooking()"><i class="fab fa-whatsapp"></i> <span id="lang-book-btn">Book Table via WhatsApp</span></button>
             </div>
         </div>
     </main>
@@ -281,17 +236,16 @@
         <button class="nav-item" id="btn-nav-favs" onclick="app.switchTab('favs')">
             <i class="fa-solid fa-heart"></i><span>Favorites</span>
         </button>
-        <button class="nav-item" id="btn-nav-cart" onclick="app.switchTab('cart')">
-            <i class="fa-solid fa-bag-shopping"></i><span>Cart</span>
-            <span class="nav-badge" id="bottom-cart-badge" style="display:none;">0</span>
+        <button class="nav-item" id="btn-nav-book" onclick="app.switchTab('book')">
+            <i class="fa-solid fa-calendar-days"></i><span>Book Table</span>
         </button>
     </nav>
 
     <div id="success-popup">
         <div class="success-card">
             <i class="fa-solid fa-circle-check"></i>
-            <h3 id="lang-success-title">Order Submitted!</h3>
-            <p id="lang-success-desc">Redirecting to WhatsApp to complete dispatch transaction details seamlessly.</p>
+            <h3 id="lang-success-title">Request Submitted!</h3>
+            <p id="lang-success-desc">Redirecting to WhatsApp to complete your premium reservation detail.</p>
             <button class="add-btn" style="width:100%; padding:10px;" onclick="app.hideSuccessPopup()">Awesome</button>
         </div>
     </div>
@@ -304,13 +258,11 @@
                 trending: "Trending Dishes",
                 menu: "Explore Culinary Menu",
                 favs: "Your Saved Favorites",
-                cartTitle: "Your Basket Items",
-                empty: "Your Cart is Empty 🌙",
-                deliveryHeader: "👤 Delivery Particulars",
-                billHeader: "Receipt Calculations",
-                whatsappBtn: "Place Order via WhatsApp",
-                successTitle: "Order Submitted!",
-                successDesc: "Redirecting to WhatsApp to complete dispatch transaction details seamlessly."
+                bookTitle: "Book A Luxury Table",
+                bookHeader: "🏰 Table Reservation Details",
+                bookBtn: "Book Table via WhatsApp",
+                successTitle: "Request Submitted!",
+                successDesc: "Redirecting to WhatsApp to complete your premium reservation detail."
             },
             gu: {
                 welcome: "મૂનલાઇટ કેફેમાં તમારું સ્વાગત છે",
@@ -318,13 +270,11 @@
                 trending: "ટ્રેન્ડિંગ વાનગીઓ",
                 menu: "મેનુ એક્સપ્લોર કરો",
                 favs: "તમારી સાચવેલી મનપસંદ વાનગીઓ",
-                cartTitle: "તમારું કાર્ટ",
-                empty: "તમારું કાર્ટ ખાલી છે 🌙",
-                deliveryHeader: "👤 ડિલિવરી વિગતો",
-                billHeader: "બિલ ગણતરી",
-                whatsappBtn: "WhatsApp દ્વારા ઓર્ડર કરો",
-                successTitle: "ઓર્ડર સફળ થયો!",
-                successDesc: "સરળ ટ્રાન્ઝેક્શન વિગતો પૂર્ણ કરવા માટે WhatsApp પર રીડાયરેક્ટ કરી રહ્યાં છીએ."
+                bookTitle: "લક્ઝરી ટેબલ બુક કરો",
+                bookHeader: "🏰 ટેબલ રિઝર્વેશન વિગતો",
+                bookBtn: "WhatsApp દ્વારા ટેબલ બુક કરો",
+                successTitle: "બુકિંગ વિનંતી સફળ થઈ!",
+                successDesc: "તમારા પ્રીમિયમ ટેબલ બુકિંગને કન્ફર્મ કરવા માટે WhatsApp પર રીડાયરેક્ટ કરી રહ્યાં છીએ."
             }
         };
 
@@ -370,27 +320,17 @@
 
         class PremiumMoonlightApp {
             constructor() {
-                // CONST MERCHANT CONFIG
                 this.WHATSAPP_MERCHANT_PHONE = "919978789793";
-                this.DELIVERY_CONSTANT_FEE = 30;
-
-                // APPLICATION ENGINES DATA CACHED PROPERTIES
                 this.activeLang = localStorage.getItem('moon_lang') || 'en';
                 this.activeTheme = localStorage.getItem('moon_theme') || 'dark';
-                this.cartState = JSON.parse(localStorage.getItem('moon_cart_store')) || {};
                 this.favsState = JSON.parse(localStorage.getItem('moon_favs_store')) || [];
-                this.isCouponApplied = JSON.parse(localStorage.getItem('moon_coupon_state')) || false;
-                this.paymentVerifiedToken = false;
                 this.selectedCategoryFilter = "all";
                 this.activeTabRoute = "home";
-                this.countdownInterval = null;
-                this.timeRemaining = 0;
 
                 this.bootEngineLifecycle();
             }
 
             bootEngineLifecycle() {
-                // Initialize Appearance Theme Config Setup
                 document.documentElement.setAttribute('data-theme', this.activeTheme);
                 document.documentElement.setAttribute('data-lang', this.activeLang);
                 
@@ -402,11 +342,14 @@
                     }, 1400);
                 });
 
+                // Set min date for booking to today
+                const today = new Date().toISOString().split('T')[0];
+                document.getElementById('bookDate').min = today;
+
                 this.registerOfflineHandlers();
                 this.registerPwaVirtualEngine();
                 this.renderCategoryChipsLayout();
                 this.refreshActiveCatalogViews();
-                this.updateBadgesQuantityUI();
                 this.updateThemeTogglerIcons();
             }
 
@@ -445,11 +388,9 @@
                 document.getElementById('lang-trending').innerText = map.trending;
                 document.getElementById('lang-menu').innerText = map.menu;
                 document.getElementById('lang-favs').innerText = map.favs;
-                document.getElementById('lang-cart-title').innerText = map.cartTitle;
-                document.getElementById('lang-empty').innerText = map.empty;
-                document.getElementById('lang-delivery-header').innerText = map.deliveryHeader;
-                document.getElementById('lang-bill-header').innerText = map.billHeader;
-                document.getElementById('lang-whatsapp-btn').innerText = map.whatsappBtn;
+                document.getElementById('lang-book-title').innerText = map.bookTitle;
+                document.getElementById('lang-book-header').innerText = map.bookHeader;
+                document.getElementById('lang-book-btn').innerText = map.bookBtn;
                 document.getElementById('lang-success-title').innerText = map.successTitle;
                 document.getElementById('lang-success-desc').innerText = map.successDesc;
             }
@@ -461,8 +402,6 @@
 
                 document.getElementById(`view-${targetViewTab}`).style.display = 'block';
                 document.getElementById(`btn-nav-${targetViewTab}`).classList.add('active');
-
-                if (targetViewTab === 'cart') this.recalculateBillCartUI();
                 window.scrollTo(0, 0);
             }
 
@@ -487,7 +426,6 @@
             refreshActiveCatalogViews() {
                 this.translateStaticLabels();
                 
-                // Render Trending Elements
                 const trendingRow = document.getElementById('trending-row');
                 const trendingItems = MENU_DATA.filter(i => i.trending);
                 trendingRow.innerHTML = trendingItems.map(item => `
@@ -495,9 +433,6 @@
                         <div style="font-size:24px; margin-bottom:5px;">✨</div>
                         <h4>${item.name}</h4>
                         <div class="price">₹${item.price}</div>
-                        <div style="margin-top:8px; display:flex; justify-content:center;" id="qty-trend-${item.id}">
-                            ${this.generateQuantityCounterMarkup(item.id)}
-                        </div>
                     </div>
                 `).join('');
 
@@ -520,7 +455,7 @@
                     return `
                         <div class="item-card">
                             <div class="item-details">
-                                <div style="display:flex; justify-content:between; align-items:center; justify-content:space-between;">
+                                <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <h3>${item.name}</h3>
                                     <i class="${isFav} fa-heart fav-icon" onclick="app.toggleFavoriteEngine(${item.id})"></i>
                                 </div>
@@ -530,9 +465,6 @@
                                 </div>
                                 <div class="item-price-row">
                                     <span class="item-price">₹${item.price}</span>
-                                    <div id="qty-catalog-${item.id}">
-                                        ${this.generateQuantityCounterMarkup(item.id)}
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -558,48 +490,10 @@
                             </div>
                             <div class="item-price-row">
                                 <span class="item-price">₹${item.price}</span>
-                                <div id="qty-fav-${item.id}">
-                                    ${this.generateQuantityCounterMarkup(item.id)}
-                                </div>
                             </div>
                         </div>
                     </div>
                 `).join('');
-            }
-
-            generateQuantityCounterMarkup(id) {
-                const cartEntry = this.cartState[id];
-                if (cartEntry && cartEntry.qty > 0) {
-                    return `
-                        <div class="qty-box">
-                            <button onclick="app.mutateCartQuantity(${id}, -1)">-</button>
-                            <span>${cartEntry.qty}</span>
-                            <button onclick="app.mutateCartQuantity(${id}, 1)">+</button>
-                        </div>
-                    `;
-                }
-                return `<button class="add-btn" onclick="app.mutateCartQuantity(${id}, 1)">ADD</button>`;
-            }
-
-            mutateCartQuantity(id, changeValue) {
-                this.triggerGlobalOverlayLoader(true);
-                
-                setTimeout(() => {
-                    const item = MENU_DATA.find(m => m.id === id);
-                    if (!this.cartState[id]) {
-                        if (changeValue > 0) this.cartState[id] = { name: item.name, price: item.price, qty: changeValue };
-                    } else {
-                        this.cartState[id].qty += changeValue;
-                        if (this.cartState[id].qty <= 0) delete this.cartState[id];
-                    }
-
-                    localStorage.setItem('moon_cart_store', JSON.stringify(this.cartState));
-                    this.updateBadgesQuantityUI();
-                    this.refreshActiveCatalogViews();
-                    
-                    if (this.activeTabRoute === 'cart') this.recalculateBillCartUI();
-                    this.triggerGlobalOverlayLoader(false);
-                }, 200);
             }
 
             toggleFavoriteEngine(id) {
@@ -612,241 +506,52 @@
                 this.refreshActiveCatalogViews();
             }
 
-            updateBadgesQuantityUI() {
-                const totalCount = Object.values(this.cartState).reduce((acc, obj) => acc + obj.qty, 0);
-                const badge = document.getElementById('bottom-cart-badge');
-                if (totalCount > 0) {
-                    badge.innerText = totalCount;
-                    badge.style.display = 'block';
-                } else {
-                    badge.style.display = 'none';
-                }
-            }
-
-            recalculateBillCartUI() {
-                const keys = Object.keys(this.cartState);
-                const emptyMsg = document.getElementById('cart-empty-msg');
-                const activeWrap = document.getElementById('cart-active-wrapper');
-                const listTarget = document.getElementById('cart-items-list');
-
-                if (keys.length === 0) {
-                    emptyMsg.style.display = 'block';
-                    activeWrap.style.display = 'none';
-                    return;
-                }
-
-                emptyMsg.style.display = 'none';
-                activeWrap.style.display = 'block';
-
-                listTarget.innerHTML = keys.map(id => {
-                    const entry = this.cartState[id];
-                    return `
-                        <div style="display:flex; justify-content:space-between; align-items:center;">
-                            <div>
-                                <h4 style="font-size:13px; font-weight:600;">${entry.name}</h4>
-                                <span style="font-size:12px; color:var(--accent); font-weight:700;">₹${entry.price}</span>
-                            </div>
-                            ${this.generateQuantityCounterMarkup(id)}
-                        </div>
-                    `;
-                }).join('');
-
-                let itemSubtotal = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
-                
-                // Minimum limit constraint rule check for coupon validity
-                if (itemSubtotal < 150 && this.isCouponApplied) {
-                    this.isCouponApplied = false;
-                    localStorage.setItem('moon_coupon_state', false);
-                }
-
-                let couponDeduction = this.isCouponApplied ? 50 : 0;
-                let calculatedGst = Math.round((itemSubtotal - couponDeduction) * 0.05);
-                if (calculatedGst < 0) calculatedGst = 0;
-                
-                let grandFinalTotal = (itemSubtotal - couponDeduction) + this.DELIVERY_CONSTANT_FEE + calculatedGst;
-
-                document.getElementById('bill-subtotal').innerText = `₹${itemSubtotal}.00`;
-                document.getElementById('bill-gst').innerText = `₹${calculatedGst}.00`;
-                document.getElementById('bill-grand').innerText = `₹${grandFinalTotal}.00`;
-
-                const discountRow = document.getElementById('bill-discount-row');
-                const couponBtn = document.getElementById('couponActionBtn');
-
-                if (this.isCouponApplied) {
-                    discountRow.style.display = 'flex';
-                    couponBtn.innerText = 'REMOVE';
-                    couponBtn.classList.add('applied');
-                } else {
-                    discountRow.style.display = 'none';
-                    couponBtn.innerText = 'APPLY';
-                    couponBtn.classList.remove('applied');
-                }
-            }
-
-            triggerCouponCode() {
-                let itemSubtotal = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
-                
-                if (!this.isCouponApplied) {
-                    if (itemSubtotal < 150) {
-                        alert("Coupon MOON50 is applicable only on orders above ₹150!");
-                        return;
-                    }
-                    this.isCouponApplied = true;
-                } else {
-                    this.isCouponApplied = false;
-                }
-
-                localStorage.setItem('moon_coupon_state', this.isCouponApplied);
-                this.recalculateBillCartUI();
-            }
-
-            handlePaymentUI(mode) {
-                const uBox = document.getElementById('upiPaymentContainer');
-                const whatsappBtn = document.getElementById('whatsappButton');
-                
-                // Clear any running interval
-                if (this.countdownInterval) {
-                    clearInterval(this.countdownInterval);
-                }
-
-                if (mode === "Online UPI") {
-                    this.paymentVerifiedToken = false;
-                    whatsappBtn.disabled = true;
-                    
-                    let sub = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
-                    let disc = this.isCouponApplied ? 50 : 0;
-                    let total = (sub - disc) + this.DELIVERY_CONSTANT_FEE + Math.round((sub - disc) * 0.05);
-                    
-                    const upiStringUrl = `upi://pay?pa=9978789793@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
-                    document.getElementById('upiGenQR').src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(upiStringUrl)}`;
-                    document.getElementById('upiGenQR').style.display = "block";
-                    document.getElementById('statusMessage').innerHTML = "";
-                    uBox.style.display = 'block';
-
-                    // 5 મિનિટ એટલે કે 300 સેકન્ડ
-                    this.timeRemaining = 5 * 60;
-                    const timerElement = document.getElementById("timer");
-                    const qrCodeElement = document.getElementById("upiGenQR");
-                    const statusMessageElement = document.getElementById("statusMessage");
-
-                    this.countdownInterval = setInterval(() => {
-                        let minutes = Math.floor(this.timeRemaining / 60);
-                        let seconds = this.timeRemaining % 60;
-
-                        seconds = seconds < 10 ? '0' + seconds : seconds;
-                        minutes = minutes < 10 ? '0' + minutes : minutes;
-
-                        timerElement.innerHTML = minutes + ":" + seconds;
-
-                        if (this.timeRemaining <= 0) {
-                            clearInterval(this.countdownInterval);
-                            timerElement.innerHTML = "00:00";
-                            qrCodeElement.style.display = "none";
-                            statusMessageElement.innerHTML = "QR Code expired! Please refresh to try again.";
-                            statusMessageElement.style.color = "red";
-                        }
-                        this.timeRemaining--;
-                    }, 1000);
-
-                } else {
-                    uBox.style.display = 'none';
-                    this.paymentVerifiedToken = false;
-                    whatsappBtn.disabled = false;
-                }
-                    this.checkPaymentStatusAutomatically(currentOrderId);
-            }
-
-            launchUpiIntent() {
-                let sub = Object.values(this.cartState).reduce((s, i) => s + (i.price * i.qty), 0);
-                let disc = this.isCouponApplied ? 50 : 0;
-                let total = (sub - disc) + this.DELIVERY_CONSTANT_FEE + Math.round((sub - disc) * 0.05);
-                window.location.href = `upi://pay?pa=9978789793@ptyes&pn=Moonlight%20Cafe&am=${total}&cu=INR`;
-            }
-
-            verifyOnlinePayment() {
-                if (this.timeRemaining <= 0) {
-                    alert("QR Code has expired. Please select payment method again.");
-                    return;
-                }
-                clearInterval(this.countdownInterval);
-                this.paymentVerifiedToken = true;
-                document.getElementById("whatsappButton").disabled = false;
-                
-                const statusMessageElement = document.getElementById("statusMessage");
-                statusMessageElement.innerHTML = "Payment Successful! Now you can place order.";
-                statusMessageElement.style.color = "green";
-                alert("✅ Online Transaction Registered! Please submit order to proceed.");
-            }
-
-            submitFinalCheckout() {
-                // Form Fields Validation Engines
-                const name = document.getElementById('custName').value.trim();
-                const addr = document.getElementById('custAddress').value.trim();
-                const phone = document.getElementById('custPhone').value.trim();
-                const payMode = document.getElementById('checkoutPaymentSelect').value;
+            submitTableBooking() {
+                const name = document.getElementById('bookName').value.trim();
+                const phone = document.getElementById('bookPhone').value.trim();
+                const date = document.getElementById('bookDate').value;
+                const time = document.getElementById('bookTime').value;
+                const guests = document.getElementById('bookGuests').value;
 
                 let isValid = true;
 
-                if (!name) { document.getElementById('err-custName').style.display='block'; isValid=false; }
-                else document.getElementById('err-custName').style.display='none';
+                if (!name) { document.getElementById('err-bookName').style.display='block'; isValid=false; }
+                else document.getElementById('err-bookName').style.display='none';
 
-                if (!addr) { document.getElementById('err-custAddress').style.display='block'; isValid=false; }
-                else document.getElementById('err-custAddress').style.display='none';
+                if (!/^\d{10}$/.test(phone)) { document.getElementById('err-bookPhone').style.display='block'; isValid=false; }
+                else document.getElementById('err-bookPhone').style.display='none';
 
-                if (!/^\d{10}$/.test(phone)) { document.getElementById('err-custPhone').style.display='block'; isValid=false; }
-                else document.getElementById('err-custPhone').style.display='none';
+                if (!date) { document.getElementById('err-bookDate').style.display='block'; isValid=false; }
+                else document.getElementById('err-bookDate').style.display='none';
 
-                if (!payMode) { document.getElementById('err-paymode').style.display='block'; isValid=false; }
-                else document.getElementById('err-paymode').style.display='none';
-
-                if (payMode === "Online UPI" && !this.paymentVerifiedToken) {
-                    alert("Please verify payment or change payment mode to Cash On Delivery.");
-                    return;
-                }
+                if (!time) { document.getElementById('err-bookTime').style.display='block'; isValid=false; }
+                else document.getElementById('err-bookTime').style.display='none';
 
                 if (!isValid) return;
 
                 this.triggerGlobalOverlayLoader(true);
 
-                // Build Structured Text for WhatsApp String Receipt Message Setup
-                let text = `*🌙 MOONLIGHT CAFE ORDER 🌙*\n\n`;
-                text += `*👤 Customer:* ${name}\n`;
-                text += `*📞 Contact:* ${phone}\n`;
-                text += `*📍 Address:* ${addr}\n`;
+                // Build Message Structure for Table Booking
+                let text = `*🏰 MOONLIGHT CAFE TABLE RESERVATION 🏰*\n\n`;
+                text += `*👤 Guest Name:* ${name}\n`;
+                text += `*📞 WhatsApp Contact:* ${phone}\n`;
+                text += `*📅 Booking Date:* ${date}\n`;
+                text += `*⏰ Time Slot:* ${time}\n`;
+                text += `*👥 Total Members:* ${guests}\n`;
                 text += `---------------------------------\n`;
-                
-                Object.values(this.cartState).forEach(i => {
-                    text += `• ${i.name} [x${i.qty}] - ₹${i.price * i.qty}\n`;
-                });
-
-                text += `---------------------------------\n`;
-                text += `*Coupon Discount:* ${this.isCouponApplied ? '-₹50.00' : '₹0.00'}\n`;
-                text += `*GST (5%) + Delivery:* Included\n`;
-                text += `*Grand Total:* ${document.getElementById('bill-grand').innerText}\n`;
-                text += `*💳 Mode:* ${payMode}\n\n`;
-                text += `_Sent via Premium Mobile WebApp System_`;
+                text += `_Please confirm availability for our arrival._\n\n`;
+                text += `_Sent via Premium Mobile Reservation System_`;
 
                 setTimeout(() => {
                     this.triggerGlobalOverlayLoader(false);
                     document.getElementById('success-popup').classList.add('active');
 
                     setTimeout(() => {
-                        // Cleanup Application State Cache
-                        this.cartState = {};
-                        this.isCouponApplied = false;
-                        this.paymentVerifiedToken = false;
-                        localStorage.removeItem('bitedash_cart'); // clear legacy state if any
-                        localStorage.setItem('moon_cart_store', JSON.stringify(this.cartState));
-                        localStorage.setItem('moon_coupon_state', false);
-                        
-                        document.getElementById('custName').value = "";
-                        document.getElementById('custAddress').value = "";
-                        document.getElementById('custPhone').value = "";
-                        document.getElementById('checkoutPaymentSelect').value = "";
-                        document.getElementById('upiPaymentContainer').style.display = 'none';
-
-                        this.updateBadgesQuantityUI();
-                        this.refreshActiveCatalogViews();
+                        // Reset Fields
+                        document.getElementById('bookName').value = "";
+                        document.getElementById('bookPhone').value = "";
+                        document.getElementById('bookDate').value = "";
+                        document.getElementById('bookTime').value = "";
                         
                         window.open(`https://wa.me/${this.WHATSAPP_MERCHANT_PHONE}?text=${encodeURIComponent(text)}`, '_blank');
                         this.hideSuccessPopup();
@@ -854,34 +559,7 @@
                     }, 2000);
                 }, 800);
             }
-checkPaymentStatusAutomatically(orderId) {
 
-    this.paymentCheckInterval = setInterval(async () => {
-        try {
-           
-            let response = await fetch(`https://api.yourgateway.com/check-status?order_id=${orderId}`);
-            let data = await response.json();
-
-            
-            if (data.status === "SUCCESS" || data.success === true) {
-                clearInterval(this.paymentCheckInterval); 
-                this.paymentVerifiedToken = true;
-                
-        
-                const statusMsg = document.getElementById("statusMessage");
-                statusMsg.innerHTML = "✅ Payment Received Successfully!";
-                statusMsg.style.color = "green";
-                        
-                document.getElementById("whatsappButton").disabled = false;
-                
-                alert("🎉Payment received! Your order is being submitted...");
-                this.submitFinalCheckout(); 
-            }
-        } catch (error) {
-            console.error("Payment status check error:", error);
-        }
-    }, 3000);
-}
             hideSuccessPopup() {
                 document.getElementById('success-popup').classList.remove('active');
             }
@@ -918,11 +596,11 @@ checkPaymentStatusAutomatically(orderId) {
         }
 
         const app = new PremiumMoonlightApp();
-        
-  <script>
+    </script>
+    <script>
         if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("sw.js");
-}
+            navigator.serviceWorker.register("sw.js");
+        }
     </script>
 </body>
 </html>
